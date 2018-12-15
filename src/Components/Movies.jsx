@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
 
-
 const style = {
     
     padding : "20px 0 0 0" 
@@ -43,11 +42,11 @@ class Movies extends Component {
           </thead>
           <tbody>
             {this.state.movies.map(movie => (
-              <tr>
-                <td>{movie.title}</td>
-                <td>{movie.genre.name}</td>
-                <td>{movie.numberInStock}</td>
-                <td>{movie.dailyRentalRate}</td>
+              <tr key={movie._id}>
+                <td >{movie.title}</td>
+                <td >{movie.genre.name}</td>
+                <td >{movie.numberInStock}</td>
+                <td >{movie.dailyRentalRate}</td>
                 <td>
                   <button
                     onClick={() => this.handleDelete(movie._id)}
