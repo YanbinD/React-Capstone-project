@@ -2,11 +2,11 @@ import React, { Component } from "react";
 
 class counter extends Component {
   // ===== With constructor =====
-  //if there is props, it needs to be included in the constructor as a parameter 
+  //if there is props, it needs to be included in the constructor as a parameter
   constructor(props) {
     super(props);
     this.state = {
-     count: props.value
+      count: props.counter.value
       // count : 0
     };
     this.handleIncrement = this.handleIncrement.bind(this);
@@ -34,10 +34,9 @@ class counter extends Component {
   render() {
     // console.log("props: ", this.props);
     return (
-      
       <div className="counter-container">
         {this.props.children}
-        <h4> using props: {this.props.id} </h4>
+        <h4> using props: {this.props.counter.id} </h4>
         <span className={this.getBadgeClass()}> {this.formatCount()}</span>
         <button
           onClick={() => this.handleIncrement({ id: 1 })}
@@ -51,9 +50,14 @@ class counter extends Component {
           style={this.styles}
           className="btn btn-scondary btm-sm m-1"
         >
-          Decrement 
+          Decrement
         </button>
-        <button onClick={()=>this.props.onDelete(this.props.id)}className="btn btn-danger btn-sm m-2">Delete</button>
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
+        </button>
       </div>
     );
   }
@@ -65,7 +69,7 @@ class counter extends Component {
 
   getBadgeClass() {
     let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "warning" :  "primary";
+    classes += this.state.count === 0 ? "warning" : "primary";
     return classes;
   }
 }

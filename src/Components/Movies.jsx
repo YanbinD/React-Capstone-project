@@ -3,9 +3,8 @@ import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
 
 const style = {
-    
-    padding : "20px 0 0 0" 
-}
+  padding: "20px 0 0 0"
+};
 
 class Movies extends Component {
   constructor() {
@@ -20,8 +19,6 @@ class Movies extends Component {
     // this.setState({movies : movies});
     this.setState({ movies });
   };
-
-
 
   render() {
     const numbersOfMovie = this.state.movies.length;
@@ -43,10 +40,10 @@ class Movies extends Component {
           <tbody>
             {this.state.movies.map(movie => (
               <tr key={movie._id}>
-                <td >{movie.title}</td>
-                <td >{movie.genre.name}</td>
-                <td >{movie.numberInStock}</td>
-                <td >{movie.dailyRentalRate}</td>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
                 <td>
                   <button
                     onClick={() => this.handleDelete(movie._id)}

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Movies from './Components/Movies';
-import Counters from './Components/Counters'
-import './App.css';
+import React, { Component } from "react";
+import Movies from "./Components/Movies";
+import Counters from "./Components/Counters";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -13,6 +13,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
