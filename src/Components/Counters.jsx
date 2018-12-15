@@ -15,7 +15,7 @@ class Counters extends Component {
     }
 
     handleDelete = (id) =>{
-       const counters = this.state.counters.filter(c=> c.id != id)
+       const counters = this.state.counters.filter(c=> c.id !== id)
        this.setState({counters})
 
     }
