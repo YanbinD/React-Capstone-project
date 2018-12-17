@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDom from "react-dom";
+// import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
 
 const style = {
