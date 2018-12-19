@@ -22,15 +22,15 @@ class Movies extends Component {
       pageSize: 4,
       currentPage: 1,
       selectedGenre: "",
-      sortColumn : {pathToTargetProperty: "title", order: "asc"}
+      sortColumn: { pathToTargetProperty: "title", order: "asc" }
     };
   }
 
   componentDidMount() {
     //append all genres to the genres retrieved from get Genres()
-    const genres = [{name: "All genres"}, ...getGenres()];
+    const genres = [{ name: "All genres" }, ...getGenres()];
 
-    this.setState({ movies: getMovies(), genres});
+    this.setState({ movies: getMovies(), genres });
   }
   handleDelete = id => {
     const movies = this.state.movies.filter(m => m._id !== id);
@@ -49,17 +49,14 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
   handleGenreSelect = genre => {
-    this.setState({ selectedGenre: genre , currentPage : 1});
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
   handleSort = sortColumn => {
-    this.setState({sortColumn})
+    this.setState({ sortColumn });
   };
 
-  render() {
-    // const movieCount = this.state.movies.length;
-    // equal
-    const { length: movieCount } = this.state.movies;
-
+  // this should return two object that the rest of the render object requires
+  preprocessRenderData = () => {
     const {
       pageSize,
       currentPage,
@@ -69,26 +66,48 @@ class Movies extends Component {
       sortColumn
     } = this.state;
 
+    const filtered =
+      selectedGenre && selectedGenre.name !== "All genres"
+        ? allMovies.filter(m => m.genre.name === selectedGenre.name)
+        : allMovies;
+
+    const sorted = _.orderBy(
+      filtered,
+      [sortColumn.pathToTargetProperty],
+      sortColumn.order
+    );
+    const movies_ = paginate(sorted, currentPage, pageSize); //render this instead of state
+
+    return { totalMovieCount: filtered.length, data: movies_ };
+  };
+
+  render() {
+    // const movieCount = this.state.movies.length;
+    // equals below
+    const { length: movieCount } = this.state.movies;
+
+    const {
+      pageSize,
+      currentPage,
+      genres,
+      selectedGenre,
+      sortColumn
+    } = this.state;
+
     if (movieCount === 0) {
       return <p>there are no movie</p>;
     }
 
-    const filtered = selectedGenre && selectedGenre.name !== 'All genres'
-      ? allMovies.filter(m => m.genre.name === selectedGenre.name)
-      : allMovies;
-
-    const sorted = _.orderBy(filtered, [sortColumn.pathToTargetProperty], sortColumn.order)
-    const movies_ = paginate(sorted, currentPage, pageSize); //render this instead of state
+    const { totalMovieCount, data } = this.preprocessRenderData(); //all the sorting and filtering logic
 
     return (
       <div className="Movies_Container">
-
         <div className="row" style={style}>
           <p style={style}>
-            Showing {filtered.length} movies {selectedGenre ? "from " + selectedGenre.name : ""}
+            Showing {totalMovieCount} movies{" "}
+            {selectedGenre ? "from " + selectedGenre.name : ""}
           </p>
         </div>
-
 
         <div className="row">
           <div className="col-2 col-md-3">
@@ -100,8 +119,8 @@ class Movies extends Component {
           </div>
 
           <div className="col">
-            <MoviesTable 
-              movies={movies_}
+            <MoviesTable
+              movies={data}
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
@@ -109,13 +128,12 @@ class Movies extends Component {
             />
 
             <Pagniation
-              movieCount={filtered.length}
+              movieCount={totalMovieCount}
               pageSize={pageSize}
               onPageChange={this.handlePageChange}
               currentPage={currentPage}
             />
           </div>
-          
         </div>
       </div>
     );
