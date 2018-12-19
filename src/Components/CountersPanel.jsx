@@ -62,17 +62,19 @@ class CountersPanel extends Component {
       this.setState({ counters });
     };
 
+    
 
     render() { 
         return (  
             <React.Fragment>
                 <Navbar 
-                    totalCounter={this.state.counters.filter(c => c.value > 0).length}/>
+                    totalCounter={this.state.counters.filter(c => c.value > 0).length}
+                    onReset={this.handleReset}
+                    onAdd={this.handleAdd}
+                    />
                 <Counters 
                     counters={this.state.counters}
-                    onReset={this.handleReset}
-                    onDelete={this.handleDelete}
-                    onAdd={this.handleAdd}
+                    onRemove={this.handleDelete}
                     onIncrement={this.handleIncrement}
                     onDecrement={this.handleDecrement}
                 />

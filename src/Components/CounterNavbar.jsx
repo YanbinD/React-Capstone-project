@@ -6,13 +6,23 @@ import React, { Component } from "react";
 // and pass props as parameter 
 // React will pass the prop object as an argument to this function at runtime 
 
-const CounterNavBar = ({totalCounter}) => {
+const CounterNavBar = ({totalCounter, onReset, onAdd}) => {
   return ( 
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <a className="navbar-brand" href="#">
-      Navbar <span className="badge badge-pill badge-secondary">{totalCounter}</span>
+      Counters  <span className="badge badge-pill badge-secondary">{totalCounter}</span>
     </a>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+    </button>
 
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div className="navbar-nav">
+      <a onClick={onReset} className="nav-item nav-link" href="#">Reset</a>
+      <a onClick={onAdd} className="nav-item nav-link" href="#">Add Counter</a>
+      <a className="nav-item nav-link disabled" href="#">Disabled</a>
+    </div>
+  </div>
   </nav>
    );
 }
