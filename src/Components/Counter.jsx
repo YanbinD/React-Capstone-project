@@ -35,13 +35,15 @@ class counter extends Component {
   //   this.setState({ count: this.state.count - 1 });
   // };
 
+  // <p> * using props to dislay ID: {this.props.counter.id} </p>
   render() {
-    // console.log("props: ", this.props);
+    console.log("props: here ", this.props);
+
+    
     return (
       <div className="counter-container">
-
         {this.props.children}
-        <h4> using props: {this.props.counter.id} </h4>
+
         <span className={this.getBadgeClass()}> {this.formatCount()}</span>
         <button
           onClick={() => this.props.onIncrement(this.props.counter)}
@@ -70,7 +72,8 @@ class counter extends Component {
   }
 
   formatCount() {
-    return this.props.counter.value === 0 ? "Zero" : this.props.counter.value;
+    const {value} = this.props.counter;
+    return value === 0 ? "Zero" : value;
   }
 
   getBadgeClass() {
