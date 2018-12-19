@@ -7,8 +7,6 @@ import React, { Component } from 'react';
 
 class TableHeader extends Component {
     
-    
-
     raiseSort = path => {
         const sortColumn = {...this.props.sortColumn};
         if (sortColumn.path === path) {
@@ -25,7 +23,7 @@ class TableHeader extends Component {
         const {sortColumn} = this.props;
 
         if (column.path !== sortColumn.path) return null; 
-        
+
         const sortArrowClassName = "fa fa-sort-".concat(sortColumn.order);
         return <i className= {sortArrowClassName} aria-hidden="true"></i> 
     }
@@ -38,6 +36,7 @@ class TableHeader extends Component {
                 <tr>
                     {this.props.columns.filter(c => c.label).map( column => (
                         <th 
+                            className="clickable"
                             key = {column.key || column.path}
                             onClick={() => this.raiseSort(column.path)}> 
                                 {column.label}
