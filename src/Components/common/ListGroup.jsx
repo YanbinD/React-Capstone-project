@@ -8,7 +8,7 @@ const ListGroup = ({
   valueProperty
 }) => {
   return (
-    <ul className="list-group">
+    <ul className="list-group" style={{overflow:"hidden"}}>
       {items.map(item => (
         <li
           key={item[valueProperty]}
