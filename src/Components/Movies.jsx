@@ -3,6 +3,7 @@ import Like from "./common/Like";
 import Pagniation from "./common/Pagination";
 // import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
+import {  paginate } from "../utils/paginate"
 
 const style = {
   padding: "20px 0 0 0"
@@ -41,12 +42,11 @@ class Movies extends Component {
     // const movieCount = this.state.movies.length;
     // equal 
     const {length : movieCount} = this.state.movies;
+    const {pageSize, currentPage, movies: allMovies} = this.state;
 
-    const {pageSize, currentPage} = this.state;
+    if (movieCount === 0) {return <p>there are no movie</p>;}
 
-    if (movieCount === 0) {
-      return <p>there are no movie</p>;
-    }
+    const movies_ = paginate(allMovies, currentPage, pageSize);//render this instead of state
 
     return (
       <div>
@@ -62,7 +62,7 @@ class Movies extends Component {
           </thead>
 
           <tbody>
-            {this.state.movies.map(movie => (
+            {movies_.map(movie => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
