@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Like from "./common/Like";
+import Pagniation from "./common/Pagination";
 // import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
 
@@ -11,7 +12,9 @@ class Movies extends Component {
   constructor() {
     super();
     this.state = {
-      movies: getMovies()
+      movies: getMovies(),
+      pageSize: 4,
+      currentPage : 1
     };
   }
 
@@ -25,19 +28,29 @@ class Movies extends Component {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
     movies[index] = { ...movies[index] };
-    movies[index].liked = ! movies[index].liked;
-    
-    this.setState({movies});
+    movies[index].liked = !movies[index].liked;
+
+    this.setState({ movies });
+  };
+
+  handlePageChange = page => {
+    this.setState({currentPage : page});
   };
 
   render() {
-    const numbersOfMovie = this.state.movies.length;
-    if (numbersOfMovie === 0) {
+    // const movieCount = this.state.movies.length;
+    // equal 
+    const {length : movieCount} = this.state.movies;
+
+    const {pageSize, currentPage} = this.state;
+
+    if (movieCount === 0) {
       return <p>there are no movie</p>;
     }
+
     return (
       <div>
-        <p style={style}>Showing {numbersOfMovie} movies</p>
+        <p style={style}>Showing {movieCount} movies</p>
         <table className="table">
           <thead>
             <tr>
@@ -47,6 +60,7 @@ class Movies extends Component {
               <th>Rate</th>
             </tr>
           </thead>
+
           <tbody>
             {this.state.movies.map(movie => (
               <tr key={movie._id}>
@@ -55,7 +69,10 @@ class Movies extends Component {
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <Like liked={movie.liked} onLikeClick={() => this.handleLike(movie)} />
+                  <Like
+                    liked={movie.liked}
+                    onLikeClick={() => this.handleLike(movie)}
+                  />
                 </td>
                 <td>
                   <button
@@ -69,6 +86,12 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <Pagniation
+          movieCount={movieCount}
+          pageSize={pageSize}
+          onPageChange={this.handlePageChange}
+          currentPage={currentPage}
+        />
       </div>
     );
   }

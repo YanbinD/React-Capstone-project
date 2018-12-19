@@ -48,7 +48,7 @@ class counter extends Component {
       <div className="counter-container">
         <div className="row">
           <div className="col col-lg-1">
-            <span class="badge badge-info">{counter.id} </span>
+            <span className="badge badge-info">{counter.id} </span>
           </div>
           <div className="col col-lg-1">
             <span className={this.getBadgeClass()}> {this.formatCount()}</span>
