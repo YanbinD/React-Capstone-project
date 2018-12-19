@@ -1,6 +1,6 @@
 import "./style.css";
 import React, { Component } from "react";
-import Like from "./common/Like";
+import MoviesTable from "./MoviesTable";
 import Pagniation from "./common/Pagination";
 import ListGroup from "./common/ListGroup";
 // import ReactDom from "react-dom";
@@ -80,6 +80,7 @@ class Movies extends Component {
           </p>
         </div>
         <div className="row">
+
           <div className="col-2 col-md-3">
             <ListGroup
               items={genres}
@@ -87,42 +88,14 @@ class Movies extends Component {
               onItemSelect={this.handleGenreSelect}
             />
           </div>
-          <div className="col">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Genre</th>
-                  <th>Stock</th>
-                  <th>Rate</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {movies_.map(movie => (
-                  <tr key={movie._id}>
-                    <td>{movie.title}</td>
-                    <td>{movie.genre.name}</td>
-                    <td>{movie.numberInStock}</td>
-                    <td>{movie.dailyRentalRate}</td>
-                    <td>
-                      <Like
-                        liked={movie.liked}
-                        onLikeClick={() => this.handleLike(movie)}
-                      />
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => this.handleDelete(movie._id)}
-                        className="btn btn-danger btn-sm"
-                      >
-                        delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="col">
+
+            <MoviesTable 
+              movies={movies_}
+              onLike={this.handleLike}
+              onDelete={this.handleDelete}
+              />
             <Pagniation
               movieCount={filtered.length}
               pageSize={pageSize}
@@ -130,6 +103,7 @@ class Movies extends Component {
               currentPage={currentPage}
             />
           </div>
+          
         </div>
       </div>
     );

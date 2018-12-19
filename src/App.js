@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Movies from "./Components/Movies";
+import MoviesPanel from "./Components/MoviesPanel";
 import CountersPanel from "./Components/CountersPanel"
 import "./App.css";
 
@@ -11,8 +11,7 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-        <Movies />
-        
+        <MoviesPanel />
         <CountersPanel />
       </main>
     );
