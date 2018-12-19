@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Like from "./common/Like";
 import TableHeader from "./common/TableHeader"
+import TableBody from './common/TableBody';
 
 
 class MovieTable extends Component {
@@ -15,14 +16,8 @@ class MovieTable extends Component {
         {key : 'delete'}
     ];
 
-
-
-
     render() { 
         const { movies, onLike, onDelete, onSort,sortOrder, sortColumn } = this.props;
-
-        
-
         return (
             <table className="table">
             <TableHeader 
@@ -30,6 +25,10 @@ class MovieTable extends Component {
                 sortColumn={sortColumn}
                 onSort={onSort}
                 sortOrder={sortOrder}
+            />
+            <TableBody
+                data={movies}
+                columns={this.columns}
             />
               <tbody>
                 {movies.map(movie => (
