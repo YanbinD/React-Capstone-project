@@ -11,10 +11,10 @@ const ListGroup = ({
     <ul className="list-group">
       {items.map(item => (
         <li
+          key={item[valueProperty]}
+          className={item === selectedItem ? "list-group-item active" : "list-group-item" }
           style={{cursor: "pointer"}}
           onClick={() => onItemSelect(item)}
-          key={item[textProperty]}
-          className={item === selectedItem ? "list-group-item active" : "list-group-item" }
         >
           {item[valueProperty]}
         </li>
@@ -23,6 +23,7 @@ const ListGroup = ({
   );
 };
 
+// use default props to make props cleaner in the parent
 ListGroup.defaultProps = {
   textProperty: "_id",
   valueProperty: "name"

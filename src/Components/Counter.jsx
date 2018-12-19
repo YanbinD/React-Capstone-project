@@ -1,40 +1,7 @@
-
 import React, { Component } from "react";
 
 // Controlled components: completly controlled by its parent
 class counter extends Component {
-  // ===== With constructor =====
-  //if there is props, it needs to be included in the constructor as a parameter
-  // constructor(props) {
-  //   super(props);
-  //   // this.state = {
-  //   //   count: props.counter.value // NOT A single source of truth, only changed when mounted, if props changes, the state will not
-  //   //   // count : 0
-  //   // };
-  //   //this.handleIncrement = this.handleIncrement.bind(this);
-  // };
-  // =============================
-  // ===== without constructor =====
-  // state = {
-  //   count: value
-  // }
-  // ===============================
-  //event handler
-
-  //handle the increment in parent not here
-  // handleIncrement = e => {
-  //   console.log(e);
-  //   this.setState({ count: this.state.count + 1 });
-  // };
-
-  // handleIncrement = () => {
-  //   this.setState({ count: this.state.count + 1 });
-  // };
-  // Alternative way to write handle function
-  // handleDecrement = () => {
-  //   this.setState({ count: this.state.count - 1 });
-  // };
-
   render() {
     const {
       counter,
@@ -60,8 +27,6 @@ class counter extends Component {
               type="button"
               className="btn btn-secondary btm-sm m-2"
             >
-            
-
               Increment
             </button>
 
@@ -104,3 +69,35 @@ class counter extends Component {
 }
 
 export default counter;
+
+// ===== With constructor =====
+//if there is props, it needs to be included in the constructor as a parameter
+// constructor(props) {
+//   super(props);
+//   // this.state = {
+//   //   count: props.counter.value // NOT A single source of truth, only changed when mounted, if props changes, the state will not
+//   //   // count : 0
+//   // };
+//   //this.handleIncrement = this.handleIncrement.bind(this);
+// };
+// =============================
+// ===== without constructor =====
+// state = {
+//   count: value
+// }
+// ===============================
+//event handler
+
+//handle the increment in parent not here
+// handleIncrement = e => {
+//   console.log(e);
+//   this.setState({ count: this.state.count + 1 });
+// };
+
+// handleIncrement = () => {
+//   this.setState({ count: this.state.count + 1 });
+// };
+// Alternative way to write handle function
+// handleDecrement = () => {
+//   this.setState({ count: this.state.count - 1 });
+// };

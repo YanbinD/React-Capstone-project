@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MoviesTable from "./MoviesTable";
 import Pagniation from "./common/Pagination";
 import ListGroup from "./common/ListGroup";
+import _ from "lodash";
 // import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
@@ -20,7 +21,8 @@ class Movies extends Component {
       genres: [],
       pageSize: 4,
       currentPage: 1,
-      selectedGenre: ""
+      selectedGenre: "",
+      sortColumn : {pathToTargetProperty: "title", order: "asc"}
     };
   }
 
@@ -49,6 +51,9 @@ class Movies extends Component {
   handleGenreSelect = genre => {
     this.setState({ selectedGenre: genre , currentPage : 1});
   };
+  handleSort = sortColumn => {
+    this.setState({sortColumn})
+  };
 
   render() {
     // const movieCount = this.state.movies.length;
@@ -60,7 +65,8 @@ class Movies extends Component {
       currentPage,
       movies: allMovies,
       genres,
-      selectedGenre
+      selectedGenre,
+      sortColumn
     } = this.state;
 
     if (movieCount === 0) {
@@ -70,17 +76,21 @@ class Movies extends Component {
     const filtered = selectedGenre && selectedGenre.name !== 'All genres'
       ? allMovies.filter(m => m.genre.name === selectedGenre.name)
       : allMovies;
-    const movies_ = paginate(filtered, currentPage, pageSize); //render this instead of state
+
+    const sorted = _.orderBy(filtered, [sortColumn.pathToTargetProperty], sortColumn.order)
+    const movies_ = paginate(sorted, currentPage, pageSize); //render this instead of state
 
     return (
       <div className="Movies_Container">
+
         <div className="row" style={style}>
           <p style={style}>
             Showing {filtered.length} movies {selectedGenre ? "from " + selectedGenre.name : ""}
           </p>
         </div>
-        <div className="row">
 
+
+        <div className="row">
           <div className="col-2 col-md-3">
             <ListGroup
               items={genres}
@@ -90,12 +100,15 @@ class Movies extends Component {
           </div>
 
           <div className="col">
-
             <MoviesTable 
               movies={movies_}
               onLike={this.handleLike}
               onDelete={this.handleDelete}
-              />
+              onSort={this.handleSort}
+              sortOrder={sortColumn.order}
+              sortColumn={sortColumn}
+            />
+            
             <Pagniation
               movieCount={filtered.length}
               pageSize={pageSize}
