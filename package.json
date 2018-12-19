@@ -23,6 +23,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2"
   }
 }
