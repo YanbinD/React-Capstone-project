@@ -105,10 +105,9 @@ class Movies extends Component {
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
-              sortOrder={sortColumn.order}
               sortColumn={sortColumn}
             />
-            
+
             <Pagniation
               movieCount={filtered.length}
               pageSize={pageSize}

@@ -21,18 +21,28 @@ class TableHeader extends Component {
         this.props.onSort(sortColumn);
     }
 
+    renderSortIcon = column => {
+        const {sortColumn} = this.props;
+
+        if (column.path !== sortColumn.path) return null; 
+        
+        const sortArrowClassName = "fa fa-sort-".concat(sortColumn.order);
+        return <i className= {sortArrowClassName} aria-hidden="true"></i> 
+    }
 
     render() { 
 
-        let sortArrowClassName = "fa fa-sort-".concat(this.props.sortOrder);
+        
         return (
             <thead>
                 <tr>
                     {this.props.columns.filter(c => c.label).map( column => (
                         <th 
                             key = {column.key || column.path}
-                            onClick={() => this.raiseSort("title")}> {column.label}
-                        <i className= {sortArrowClassName} aria-hidden="true"></i> 
+                            onClick={() => this.raiseSort(column.path)}> 
+                                {column.label}
+                                {this.renderSortIcon(column)}
+                        
                         </th>
                     ))}
                 </tr>
