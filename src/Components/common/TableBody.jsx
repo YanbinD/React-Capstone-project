@@ -5,8 +5,8 @@ class TableBody extends Component {
 
 	renderCell = (item, column) => {
 		// calls the content(), inside MovieTable.column with the item, and it will return a react element 
-		if (column.content) return column.content(item);
-		return _.get(item, column.path);
+		if (column.content) return column.content(item); // for rendering Like and delete button 
+		return _.get(item, column.path);				 // for rendering movie attritube 
 	}
 
 	createKey = (item, column) => {

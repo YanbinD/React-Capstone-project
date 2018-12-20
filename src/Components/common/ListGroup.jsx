@@ -11,7 +11,7 @@ const ListGroup = ({
     <ul className="list-group" style={{ overflow: "hidden" }}>
       {items.map(item => (
         <li
-          key={item[valueProperty]}
+          key={item[textProperty]}
           className={
             item === selectedItem ? "list-group-item active" : "list-group-item"
           }

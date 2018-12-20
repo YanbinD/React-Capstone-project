@@ -16,3 +16,7 @@ code {
 .clickable {
   cursor : pointer;
 }
+
+.navbar-nav {
+  cursor : pointer;
+}

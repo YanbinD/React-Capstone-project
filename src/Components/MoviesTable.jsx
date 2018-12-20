@@ -26,6 +26,8 @@ class MovieTable extends Component {
         </button>
       )
     }
+    // the content attritube reference to an arrow function that takes in the movie object from the map function in table body upon rendering, 
+    // the arrow function will return 
   ];
 
   render() {

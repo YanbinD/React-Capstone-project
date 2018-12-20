@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 
 // for stateless component, remove the this. before props
 // and pass props as parameter
 // React will pass the prop object as an argument to this function at runtime
 
-const CounterNavBar = ({ totalCounter, onReset, onAdd }) => {
+const CounterNavBar = ({ totalActiveCounter, totalCounter, onReset, onAdd }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        Counters{" "}
-        <span className="badge badge-pill badge-secondary">{totalCounter}</span>
-      </a>
+      <li className="navbar-brand">
+        Counters{" "} 
+        <span className="badge badge-pill badge-secondary">{totalActiveCounter+ "/" + totalCounter}</span>
+      </li>
       <button
         className="navbar-toggler"
         type="button"
@@ -25,15 +25,12 @@ const CounterNavBar = ({ totalCounter, onReset, onAdd }) => {
 
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a onClick={onReset} className="nav-item nav-link" href="#">
+          <li onClick={onReset} className={'nav-item nav-link'.concat(totalCounter === 0 ? " disabled" : "")}>
             Reset
-          </a>
-          <a onClick={onAdd} className="nav-item nav-link" href="#">
+          </li>
+          <li onClick={onAdd} className="nav-item nav-link">
             Add Counter
-          </a>
-          <a className="nav-item nav-link disabled" href="#">
-            Disabled
-          </a>
+          </li>
         </div>
       </div>
     </nav>
