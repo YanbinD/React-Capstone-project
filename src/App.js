@@ -3,7 +3,8 @@ import {Route, Switch, Redirect, Link} from 'react-router-dom';
 import NavBar from "./Components/navBar"
 //swotch will render the first path that matches
 import MoviesPanel from "./Components/MoviesPanel";
-import CountersPanel from "./Components/CountersPanel"
+import CountersPanel from "./Components/Counters_group/CountersPanel"
+import LoginForm from "./Components/LoginForm"
 import "./App.css";
 
 
@@ -19,9 +20,9 @@ class App extends Component {
                 <Route path = "/Home" component={Home} />  
                 <Route path = "/Movies" component={MoviesPanel}/>
                 <Redirect from="/movie" to="/Movies" />
+                <Route path = "/login" component={LoginForm} />
                 <Route path = "/Counters" component={CountersPanel} />
                 <Redirect from="/counter" to="/Counters" />
-                
                 <Route path = "/both" render={ () => 
                   <div>
                     <CountersPanel />
