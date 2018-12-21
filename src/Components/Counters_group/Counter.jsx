@@ -5,7 +5,6 @@ class counter extends Component {
   render() {
     const {
       counter,
-      children,
       onIncrement,
       onDecrement,
       onRemove
