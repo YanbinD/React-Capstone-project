@@ -28,7 +28,7 @@ class App extends Component {
                     <MoviesPanel />
                 </div>}/>
                 <Route path ="/not-found" exact component={NotFound} />
-                <Redirect to="/not-found" />
+                <Redirect to="/Home" />
               </Switch>
           </main>
       </React.Fragment>
