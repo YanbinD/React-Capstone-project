@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import Counter from "./Counter";
 
-class Counters extends Component {
-  render() {
+const Counters = (props) => {
+
     // Destructuring, take the properties that's needed and no need to call this.props on them
-    const { onRemove, onDecrement, onIncrement, counters } = this.props;
+    const { onRemove, onDecrement, onIncrement, counters } = props;
 
     return (
       <div>
@@ -23,7 +23,7 @@ class Counters extends Component {
         ))}
       </div>
     );
-  }
 }
+ 
 
 export default Counters;
