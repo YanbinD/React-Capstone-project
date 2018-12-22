@@ -1,20 +1,24 @@
 import React from 'react';
-const Input = (props) => {
-    const {name,type, value, onChange, label, error} = props;
+
+// due to the repeatitave pattern for the input tag, 
+// the spread attritubes can be used to symplify the syntax
+// only keep name, label, error as they were not used within the input tag
+// the ...rest will include any other property other than the specified ones 
+const Input = ({name, label, error, ...rest}) => {
+    // const {name, label, error, ...rest} = props;
     return ( 
         <div className="form-group">
             <label htmlFor={name}> {label} </label>
             <input
-              name={name}
-              onChange={onChange}
-              value={value}
+              {...rest}
               id={name}
-              type={type}
+              name={name}
               className="form-control"
             />
             { error && <div className="alert-danger">{error}</div>}
           </div>
      );
 }
+
  
 export default Input;
