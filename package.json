@@ -25,6 +25,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "joi-browser": "^13.4.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react-router-dom": "^4.3.1"
