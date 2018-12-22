@@ -1,13 +1,34 @@
 import React, { Component } from "react";
-import Input from "./common/input"
+import Input from "./common/Input"
 class LoginForm extends Component {
+// error is an object that holds all the 
   state = {
-    account: { username: "", password: "" }
+    account: { username: "", password: "" },
+    errors : {
+
+    }
   };
 
+  validate = () => {
+      const errors = {};
+      if (this.state.account.username.trim() === '') {
+          errors.username = "username is required"
+      }
+      if (this.state.account.password.trim() === '') {
+        errors.password = "password is required"
+    }
+      // Object.keys(errors) will return all the key of the error object 
+      return Object.keys(errors).length === 0 ? null : errors;
+  }
+
   handleSubmit = e => {
-    console.log(this.state);
     e.preventDefault();
+    const errors = this.validate();
+    // console.log(errors)
+    this.setState({errors : errors || {}}); 
+    // can not just set state to errors because it being pass into the <Input /> as a props, undifine prop cause error 
+    if (errors) return;
+    
   };
 
   handleChange = ({currentTarget : input}) => {
@@ -17,22 +38,24 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { username, password } = this.state;
+    const { account, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <Input
             name="username"
-            value={username}
+            value={account.username}
             label="Username"
             onChange={this.handleChange}
+            error={errors.username}
           />
           <Input
             name="password"
-            value={password}
+            value={account.password}
             label="Password"
             onChange={this.handleChange}
+            error={errors.password}
           />
 
           <button className="btn btn-primary">login</button>
