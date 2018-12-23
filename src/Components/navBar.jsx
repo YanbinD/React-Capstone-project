@@ -12,10 +12,18 @@ const NavBar = () => {
         {" "}
         <i className="fa fa-slideshare fa-3x" aria-hidden="true" />{" "}
       </Link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul className="navbar-nav">
           <NavLink className="nav-item nav-link" to="/movies">
             Movies

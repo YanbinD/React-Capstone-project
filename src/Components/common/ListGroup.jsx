@@ -10,11 +10,8 @@ const ListGroup = ({
   return (
     <ul className="list-group" style={{ overflow: "hidden" }}>
       {items.map(item => (
-        <li
-          key={item[textProperty]}
-          className={
-            item === selectedItem ? "list-group-item active" : "list-group-item"
-          }
+        <li key={item[valueProperty]}
+          className={item === selectedItem ? "list-group-item active" : "list-group-item"}
           style={{ cursor: "pointer" }}
           onClick={() => onItemSelect(item)}
         >

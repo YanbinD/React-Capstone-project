@@ -9,7 +9,7 @@ import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
 
 const style = {
-  padding: "0 0 0 29px"
+  margin: "5px"
 };
 
 class MoviesPanel extends Component {
@@ -21,7 +21,8 @@ class MoviesPanel extends Component {
       pageSize: 4,
       currentPage: 1,
       selectedGenre: "",
-      sortColumn: { pathToTargetProperty: "title", order: "asc" }
+      sortColumn: { pathToTargetProperty: "title", order: "asc" },
+      searchQuery: ""
     };
   }
 
@@ -51,11 +52,20 @@ class MoviesPanel extends Component {
   };
 
   handleGenreSelect = genre => {
-    this.setState({ selectedGenre: genre, currentPage: 1 }); //reset the currentPage to 1 after switching genre
+    this.setState({ selectedGenre: genre, currentPage: 1, searchQuery: "" }); //reset the currentPage to 1 after switching genre, reset the searchQuery
   };
 
   handleSort = sortColumn => {
     this.setState({ sortColumn });
+  };
+
+  handleSearchInput = e => {
+    this.setState({ searchQuery: e.currentTarget.value });
+  };
+
+  handleSearchSubmit = e => {
+    e.preventDefault();
+    this.setState({ searchQuery: '' });
   };
 
   // this should return two object that the rest of the render object requires
@@ -65,13 +75,20 @@ class MoviesPanel extends Component {
       currentPage,
       movies: allMovies,
       selectedGenre,
-      sortColumn
+      sortColumn,
+      searchQuery
     } = this.state;
+
+    const searchResult = searchQuery
+      ? allMovies.filter(m =>
+          _.includes(m.title.toLowerCase(), searchQuery.toLowerCase())
+        )
+      : allMovies;
 
     const filtered =
       selectedGenre && selectedGenre.name !== "All genres"
-        ? allMovies.filter(m => m.genre.name === selectedGenre.name)
-        : allMovies;
+        ? searchResult.filter(m => m.genre.name === selectedGenre.name)
+        : searchResult;
 
     const sorted = _.orderBy(
       filtered,
@@ -79,10 +96,28 @@ class MoviesPanel extends Component {
       sortColumn.order
     );
 
-    const movies_ = paginate(sorted, currentPage, pageSize); //render this instead of movies[] in state 
+    const movies_ = paginate(sorted, currentPage, pageSize); //render this instead of movies[] in state
 
     return { totalMovieCount: filtered.length, data: movies_ };
   };
+
+  renderMovieNavbar(totalMovieCount, selectedGenre) {
+    return (
+      <nav className="navbar">
+        <li className="navbar-brand">
+          Showing {totalMovieCount} movies{" "}
+          {selectedGenre ? "from " + selectedGenre.name : ""}
+        </li>
+
+        <SearchBox
+          value={this.state.searchQuery}
+          onSubmit={this.handleSearchSubmit}
+          onChange={this.handleSearchInput}
+        />
+        {/* <button style={style} onClick={this.handleAddNew} className="btn btn-outline-primary" type="submit">Add New Movies</button> */}
+      </nav>
+    );
+  }
 
   render() {
     // const movieCount = this.state.movies.length;
@@ -94,7 +129,7 @@ class MoviesPanel extends Component {
       currentPage,
       genres,
       selectedGenre,
-      sortColumn
+      sortColumn,
     } = this.state;
 
     if (movieCount === 0) {
@@ -105,12 +140,7 @@ class MoviesPanel extends Component {
 
     return (
       <div className="Movies_Container">
-        <div className="row" style={style}>
-          <p style={style}>
-            Showing {totalMovieCount} movies{" "}
-            {selectedGenre ? "from " + selectedGenre.name : ""}
-          </p>
-        </div>
+        {this.renderMovieNavbar(totalMovieCount, selectedGenre)}
 
         <div className="row">
           <div className="col-2 col-md-3">
@@ -144,3 +174,25 @@ class MoviesPanel extends Component {
 }
 
 export default MoviesPanel;
+
+const SearchBox = ({ value, onSubmit, onChange }) => {
+  return (
+    <form className="form-inline">
+      <input
+        onChange={onChange}
+        className="form-control mr-sm-2"
+        type="search"
+        placeholder="Search Movies"
+        aria-label="Search"
+        value={value}
+      />
+      <button
+        onClick={onSubmit}
+        className="btn btn-outline-info my-2 my-sm-0"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  );
+};
