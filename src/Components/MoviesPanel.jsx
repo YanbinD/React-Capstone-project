@@ -107,8 +107,7 @@ class MoviesPanel extends Component {
           Showing {totalMovieCount} movies{" "}
           {selectedGenre ? "from " + selectedGenre.name : ""}
         </li>
-        <div className="collapse navbar-collapse" id="navbarNav" />>
-      
+        <div className="collapse navbar-collapse" id="navbarNav" />
           <Link to="movies/new" className="btn btn-outline-primary"> New Movie </Link>
       </nav>
     );
