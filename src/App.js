@@ -5,6 +5,7 @@ import NavBar from "./Components/navBar"
 import MoviesPanel from "./Components/MoviesPanel";
 import CountersPanel from "./Components/Counters_group/CountersPanel"
 import LoginForm from "./Components/LoginForm_joy"
+import RegisterForm from "./Components/RegisterForm"
 import "./App.css";
 
 
@@ -21,6 +22,7 @@ class App extends Component {
                 <Route path = "/Movies" component={MoviesPanel}/>
                 <Redirect from="/movie" to="/Movies" />
                 <Route path = "/login" component={LoginForm} />
+                <Route path = "/register" component={RegisterForm} />
                 <Route path = "/Counters" component={CountersPanel} />
                 <Redirect from="/counter" to="/Counters" />
                 <Route path = "/both" render={ () => 
