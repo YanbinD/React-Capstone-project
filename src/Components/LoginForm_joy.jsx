@@ -21,14 +21,6 @@ class LoginForm extends Form {
       .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}$/, "password")
   };
 
-  schema_prop = {
-    username: Joi.string()
-      .required()
-      .label("Username"),
-    password: Joi.string()
-      .required()
-      .label("Password")
-  };
   // to handle the back end login specific to this form
   doSubmit = () => {
     console.log("submitted");

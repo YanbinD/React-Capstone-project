@@ -8,8 +8,6 @@ class LoginForm extends Component {
     errors: {}
   };
 
-  const passwordRegex =  
-
   schema = {
     password: Joi.string()
       .email()
