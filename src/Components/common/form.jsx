@@ -15,7 +15,9 @@ class Form extends Component {
 
     if (!result.error) return null;
     const errors = {};
-    for (let item of result.error.details) errors[item.path[0]] = item.message;
+    for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+    }    
     return errors;
   };
 
@@ -44,7 +46,7 @@ class Form extends Component {
     const errorMessage = this.validProperty(input);
 
     if (errorMessage) {
-      console.log(errorMessage);
+    //   console.log(errorMessage);
       errors[input.name] = errorMessage;
     } else delete errors[input.name];
 
@@ -68,6 +70,7 @@ class Form extends Component {
   }
 
   renderButton(label) {
+    
     return (
       <button
         disabled={this.validate()} //diable the button with the validate function

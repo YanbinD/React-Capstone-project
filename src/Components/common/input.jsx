@@ -6,6 +6,7 @@ import React from 'react';
 // the ...rest will include any other property other than the specified ones 
 const Input = ({name, label, error, ...rest}) => {
     // const {name, label, error, ...rest} = props;
+
     return ( 
         <div className="form-group">
             <label htmlFor={name}> {label} </label>
