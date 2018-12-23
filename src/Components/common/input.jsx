@@ -8,13 +8,14 @@ const Input = ({name, label, error, ...rest}) => {
     // const {name, label, error, ...rest} = props;
 
     return ( 
-        <div className="form-group">
+        <div >
             <label htmlFor={name}> {label} </label>
             <input
               {...rest}
               id={name}
               name={name}
               className="form-control"
+              type="text"
             />
             { error && <div className="alert-danger">{error}</div>}
           </div>

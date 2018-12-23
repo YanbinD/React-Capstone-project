@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import MoviesTable from "./MoviesTable";
 import Pagniation from "./common/Pagination";
 import ListGroup from "./common/ListGroup";
+import SearchBox from "./common/SearchBox";
 import _ from "lodash";
 // import ReactDom from "react-dom";
 import { getMovies } from "../services/fakeMovieService";
@@ -59,13 +61,10 @@ class MoviesPanel extends Component {
     this.setState({ sortColumn });
   };
 
-  handleSearchInput = e => {
-    this.setState({ searchQuery: e.currentTarget.value });
-  };
-
-  handleSearchSubmit = e => {
-    e.preventDefault();
-    this.setState({ searchQuery: '' });
+  // instead of returning the e and the ndo e.currentTarget.value,
+  // the handleSearchInput was called with the e.currentTarget.value pass in as parameter
+  handleSearchInput = query => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
   };
 
   // this should return two object that the rest of the render object requires
@@ -103,18 +102,14 @@ class MoviesPanel extends Component {
 
   renderMovieNavbar(totalMovieCount, selectedGenre) {
     return (
-      <nav className="navbar">
+      <nav className="navbar navbar-my">
         <li className="navbar-brand">
           Showing {totalMovieCount} movies{" "}
           {selectedGenre ? "from " + selectedGenre.name : ""}
         </li>
-
-        <SearchBox
-          value={this.state.searchQuery}
-          onSubmit={this.handleSearchSubmit}
-          onChange={this.handleSearchInput}
-        />
-        {/* <button style={style} onClick={this.handleAddNew} className="btn btn-outline-primary" type="submit">Add New Movies</button> */}
+        <div className="collapse navbar-collapse" id="navbarNav" />>
+      
+          <Link to="movies/new" className="btn btn-outline-primary"> New Movie </Link>
       </nav>
     );
   }
@@ -129,7 +124,7 @@ class MoviesPanel extends Component {
       currentPage,
       genres,
       selectedGenre,
-      sortColumn,
+      sortColumn
     } = this.state;
 
     if (movieCount === 0) {
@@ -142,6 +137,11 @@ class MoviesPanel extends Component {
       <div className="Movies_Container">
         {this.renderMovieNavbar(totalMovieCount, selectedGenre)}
 
+        <SearchBox
+          label={"search movies"}
+          value={this.state.searchQuery}
+          onChange={this.handleSearchInput}
+        />
         <div className="row">
           <div className="col-2 col-md-3">
             <ListGroup
@@ -174,25 +174,3 @@ class MoviesPanel extends Component {
 }
 
 export default MoviesPanel;
-
-const SearchBox = ({ value, onSubmit, onChange }) => {
-  return (
-    <form className="form-inline">
-      <input
-        onChange={onChange}
-        className="form-control mr-sm-2"
-        type="search"
-        placeholder="Search Movies"
-        aria-label="Search"
-        value={value}
-      />
-      <button
-        onClick={onSubmit}
-        className="btn btn-outline-info my-2 my-sm-0"
-        type="submit"
-      >
-        Search
-      </button>
-    </form>
-  );
-};

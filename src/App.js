@@ -6,6 +6,7 @@ import MoviesPanel from "./Components/MoviesPanel";
 import CountersPanel from "./Components/Counters_group/CountersPanel"
 import LoginForm from "./Components/LoginForm_joy"
 import RegisterForm from "./Components/RegisterForm"
+import MovieForm from "./Components/MovieForm"
 import "./App.css";
 
 
@@ -19,6 +20,7 @@ class App extends Component {
 
               <Switch>
                 <Route path = "/Home" component={Home} />  
+                <Route path="/movies/:id" component={MovieForm} />
                 <Route path = "/Movies" component={MoviesPanel}/>
                 <Redirect from="/movie" to="/Movies" />
                 <Route path = "/login" component={LoginForm} />
