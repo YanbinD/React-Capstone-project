@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import Input from "./Input";
+import Input from "./input";
 import Select from "./select";
 class Form extends Component {
   state = {
