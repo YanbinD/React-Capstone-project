@@ -9,13 +9,15 @@ axios.interceptors.response.use(null, error => {
     error.response.status < 500;
 
   if (!expectedError) {
-    logger.log(error);
+    console.log(error);
     toast.error("An unexpected error occurrred.");
   }
 
   return Promise.reject(error);
 });
 
+
+// wrapper for the axios 
 export default {
   get: axios.get,
   post: axios.post,

@@ -1,7 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-
+import { toast } from "react-toastify" 
 class LoginForm extends Form {
   // error is an object that holds all the
   state = {
@@ -23,7 +23,7 @@ class LoginForm extends Form {
 
   // to handle the back end login specific to this form
   doSubmit = () => {
-    console.log("submitted");
+    toast("logging in ");
   };
 
   renderPasswordPrompt() {

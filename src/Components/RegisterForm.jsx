@@ -1,7 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-
+import { toast } from "react-toastify" 
 class RegisterForm extends Form {
   state = {
     data: { username: "", password: "", email: "" },
@@ -23,7 +23,7 @@ class RegisterForm extends Form {
   };
 
   doSubmit = () => {
-    console.log("submitted");
+    toast("submitted");
   };
 
   renderPasswordPrompt() {

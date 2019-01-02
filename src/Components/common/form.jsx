@@ -34,8 +34,7 @@ class Form extends Component {
 
   validProperty = ({ name, value }) => {
     const obj = { [name]: value }; //dynamically set the key to be the name of the currentTarget
-    // when validating the field, we use subschema
-    // get value from schema object (set at runtime)
+    // when validating the field, we use subschema get value from schema object (set at runtime)
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.validate(obj, schema);
 

@@ -10,9 +10,7 @@ import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
 
-const style = {
-  margin: "5px"
-};
+
 
 class MoviesPanel extends Component {
   constructor() {
@@ -28,9 +26,11 @@ class MoviesPanel extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    // const {data} = await getGenres();
     //append all genres to the genres retrieved from get Genres()
     const genres = [{ name: "All genres" }, ...getGenres()];
+    // const genres = [{ name: "All genres" }, ...data];
     this.setState({ movies: getMovies(), genres });
   }
 
