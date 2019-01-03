@@ -1,5 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project Structure
 
+![vidbox](https://ws1.sinaimg.cn/large/006tNbRwly1fyt2x1bx51j31qy0s3tga.jpg)
 
-
-![image-20181220151102609](https://ws1.sinaimg.cn/large/006tNbRwly1fye01dqdf9j317b0u0kjl.jpg)
